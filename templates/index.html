@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <style>
+        /* Add your CSS here */
+        .post-container {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .post-title {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        .post-info {
+            font-size: 14px;
+            color: #666;
+        }
+        .pagination {
+            margin-top: 20px;
+        }
+        .post-image {
+            max-width: 100%;
+            height: auto;
+        }
+        .like-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Index</h1>
+    <a href="{% url 'create_post' %}">Create New Post</a>
+
+    <button class="profile-button">
+        <div class="profile-button__border"></div>
+        <a href="{% url 'profile' request.user %}">
+            <div class="profile-button__picture">
+                <img src="{{request.user.profile.image.url}}" alt="User Picture">
+            </div>
+        </a>
+    </button>
+
+    <!-- Loop through EvenClub posts -->
+    <h2>EvenClub</h2>
+    {% for post in even_club_posts %}
+    <div class="post-container">
+        <h2 class="post-title">{{ post.legende }}</h2>
+        <p class="post-info">Date of publication: {{ post.date_publication|date:"d/m/Y" }}</p>
+        <img src="{{ post.image.url }}" alt="Post Image" class="post-image">
+        <p>User: {{ post.user.username }}</p>
+        <form method="post" action="{% url 'like' post.id %}">
+            {% csrf_token %}
+            <button type="submit" class="like-button">Like</button>
+        </form>
+    </div>
+    {% endfor %}
+
+    <!-- Loop through EvenSocial posts -->
+    <h2>EvenSocial</h2>
+    {% for post in even_social_posts %}
+    <div class="post-container">
+        <h2 class="post-title">{{ post.legende }}</h2>
+        <p class="post-info">Date of publication: {{ post.date_publication|date:"d/m/Y" }}</p>
+        <img src="{{ post.image.url }}" alt="Post Image" class="post-image">
+        <p>User: {{ post.user.username }}</p>
+        <form method="post" action="{% url 'like' post.id %}">
+            {% csrf_token %}
+            <button type="submit" class="like-button">Like</button>
+        </form>
+    </div>
+    {% endfor %}
+
+    <!-- Loop through Stage posts -->
+    <h2>Stage</h2>
+    {% for post in stage_posts %}
+    <div class="post-container">
+        <img src="{{ post.image.url }}" alt="Post Image" class="post-image">
+        <h2 class="post-title">{{ post.legende }}</h2>
+        <p class="post-info">Date of publication: {{ post.date_publication|date:"d/m/Y" }}</p>
+        <p>User: {{ post.user.username }}</p>
+        <form method="post" action="{% url 'like' post.id %}">
+            {% csrf_token %}
+            <button type="submit" class="like-button">Like</button>
+        </form>
+    </div>
+    {% endfor %}
+
+    <!-- Loop through Transport posts -->
+    <h2>Transport</h2>
+    {% for post in transport_posts %}
+    <div class="post-container">
+        <img src="{{ post.image.url }}" alt="Post Image" class="post-image">
+        <h2 class="post-title">{{ post.legende }}</h2>
+        <p class="post-info">Date of publication: {{ post.date_publication|date:"d/m/Y" }}</p>
+        <p>User: {{ post.user.username }}</p>
+        <form method="post" action="{% url 'like' post.id %}">
+            {% csrf_token %}
+            <button type="submit" class="like-button">Like</button>
+        </form>
+    </div>
+    {% endfor %}
+
+    <!-- Loop through Logement posts -->
+    <h2>Logement</h2>
+    {% for post in logement_posts %}
+    <div class="post-container">
+        <img src="{{ post.image.url }}" alt="Post Image" class="post-image">
+        <h2 class="post-title">{{ post.legende }}</h2>
+        <p class="post-info">Date of publication: {{ post.date_publication|date:"d/m/Y" }}</p>
+        <p>User: {{ post.user.username }}</p>
+        <form method="post" action="{% url 'like' post.id %}">
+            {% csrf_token %}
+            <button type="submit" class="like-button">Like</button>
+        </form>
+    </div>
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+</head>
+<body>
+    <h1>Notifications</h1>
+
+    <!-- Affichage des notifications -->
+    <div>
+        {% if notifications %}
+            <ul>
+                {% for notification in notifications %}
+                    <li>{{ notification.contenu }} - {{ notification.date_notification }}</li>
+                    <!-- Ajoutez d'autres détails de notification ici si nécessaire -->
+                    <form method="POST" action="{% url 'delete-notification' notification.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Supprimer</button>
+                    </form>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Aucune notification.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

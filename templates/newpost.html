@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Post</title>
+</head>
+<body>
+    <h1>Create New Post</h1>
+    {% if form.errors %}
+    <ul>
+        {% for field, errors in form.errors.items %}
+            {% for error in errors %}
+                <li>{{ field|title }}: {{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+{% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="post_type">Post Type:</label>
+        <select name="post_type" id="post_type">
+            <option value="EvenClub">Even Club</option>
+            <option value="EvenSocial">Even Social</option>
+            <option value="Stage">Stage</option>
+            <option value="Logement">Logement</option>
+            <option value="Transport">Transport</option>
+        </select>
+        <br><br>
+        <div id="evenclub_fields" style="display: none;">
+            <!-- EvenClub Form Fields -->
+            <label for="image">Image:</label>
+            <input type="file" name="image" id="image">
+            <br><br>
+            <label for="legende">Legende:</label>
+            <input type="text" name="legende" id="legende">
+            <br><br>
+          
+            <label for="date_evenement">Date Evenement:</label>
+            <input type="date" name="date_evenement" id="date_evenement">
+            <br><br>
+            <label for="Cprix">Prix:</label>
+            <input type="number" name="Cprix" id="Cprix">
+            <br><br>
+            <label for="nom">Nom:</label>
+            <input type="text" name="nom" id="nom">
+            <br><br>
+            <label for="domaine">Domaine:</label>
+            <input type="text" name="domaine" id="domaine">
+            <br><br>
+        </div>
+        <div id="evensocial_fields" style="display: none;">
+            <!-- EvenSocial Form Fields -->
+            <label for="image">Image:</label>
+            <input type="file" name="image" id="image">
+            <br><br>
+            <label for="legende">Legende:</label>
+            <input type="text" name="legende" id="legende">
+            <br><br>
+           
+            <label for="date_evenement">Date Evenement:</label>
+            <input type="date" name="date_evenement" id="date_evenement">
+            <br><br>
+            <label for="prixS">Prix:</label>
+            <input type="number" name="prixS" id="prixS">
+            <br><br>
+            <label for="nom">Nom:</label>
+            <input type="text" name="nom" id="nom">
+            <br><br>
+            <label for="theme">Theme:</label>
+            <input type="text" name="theme" id="theme">
+            <br><br>
+        </div>
+        <div id="stage_fields" style="display: none;">
+            <!-- Stage Form Fields -->
+            <label for="image">Image:</label>
+            <input type="file" name="image" id="image">
+            <br><br>
+            <label for="legende">Legende:</label>
+            <input type="text" name="legende" id="legende">
+            <br><br>
+           
+            <label for="localisation">Localisation:</label>
+            <input type="text" name="localisation" id="localisation">
+            <br><br>
+            <label for="societe">Societe:</label>
+            <input type="text" name="societe" id="societe">
+            <br><br>
+            <label for="duree">Duree:</label>
+            <input type="text" name="duree" id="duree">
+            <br><br>
+            <label for="sujet">Sujet:</label>
+            <input type="text" name="sujet" id="sujet">
+            <br><br>
+            <label for="specialite">Specialite:</label>
+            <input type="text" name="specialite" id="specialite">
+            <br><br>
+        </div>
+        <div id="logement_fields" style="display: none;">
+            <!-- Logement Form Fields -->
+            <label for="image">Image:</label>
+            <input type="file" name="image" id="image">
+            <br><br>
+            <label for="legende">Legende:</label>
+            <input type="text" name="legende" id="legende">
+            <br>
+            
+            
+            <label for="localisation">Localisation:</label>
+            <input type="text" name="localisation" id="localisation">
+            <br><br>
+            <label for="prix">Prix:</label>
+            <input type="number" name="prix" id="prix">
+            <br><br>
+            <label for="contact_info">Contact Info:</label>
+            <input type="text" name="contact_info" id="contact_info" >
+            <br><br>
+        </div>
+        <div id="transport_fields" style="display: none;">
+            <!-- Transport Form Fields -->
+            <label for="image">Image:</label>
+            <input type="file" name="image" id="image">
+            <br><br>
+            <label for="legende">Legende:</label>
+            <input type="text" name="legende" id="legende">
+            <br>
+            
+            <label for="destination">Destination:</label>
+            <input type="text" name="destination" id="destination">
+            <br><br>
+            <label for="type_transport">Type Transport:</label>
+            <input type="text" name="type_transport" id="type_transport">
+            <br><br>
+            <label for="contact_info">Contact Info:</label>
+            <input type="text" name="contact_info" id="contact_info">
+            <br><br>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+   
+    <script>
+        document.getElementById('post_type').addEventListener('change', function() {
+            var postType = this.value;
+            var allFields = document.querySelectorAll('[id$="_fields"]');
+            allFields.forEach(function(field) {
+                if (field.id.startsWith(postType.toLowerCase())) {
+                    field.style.display = 'block';
+                } else {
+                    field.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
